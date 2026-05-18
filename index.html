@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Website Growth & Ops Audit</title>
+  <meta name="description" content="A practical public-site audit for clarity, trust, conversion, lead capture, and follow-up. No login required for the first review.">
+  <style>
+    :root {
+      --ink: #18211d;
+      --muted: #5c6a62;
+      --paper: #f6f1e8;
+      --panel: rgba(255, 252, 245, 0.86);
+      --panel-strong: #fffaf0;
+      --moss: #324f3b;
+      --moss-soft: #dce8d1;
+      --ochre: #bf7b30;
+      --clay: #a64f3c;
+      --line: rgba(50, 79, 59, 0.18);
+      --shadow: 0 24px 70px rgba(45, 53, 44, 0.16);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: Georgia, "Iowan Old Style", "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 8% 12%, rgba(191, 123, 48, 0.22), transparent 28rem),
+        radial-gradient(circle at 84% 4%, rgba(50, 79, 59, 0.24), transparent 24rem),
+        linear-gradient(135deg, #fbf4e4 0%, #edf3e2 48%, #f9eadb 100%);
+      line-height: 1.55;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.28;
+      background-image:
+        linear-gradient(rgba(50, 79, 59, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(50, 79, 59, 0.08) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, black, transparent 72%);
+    }
+
+    a {
+      color: var(--moss);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 24px 0 56px;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 32px;
+      font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--ink);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: conic-gradient(from 180deg, var(--moss), var(--ochre), var(--clay), var(--moss));
+      box-shadow: inset 0 0 0 6px rgba(255, 250, 240, 0.72);
+    }
+
+    .nav-note {
+      text-align: right;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.72fr);
+      gap: 34px;
+      align-items: stretch;
+    }
+
+    .hero-copy {
+      padding: clamp(26px, 5vw, 44px);
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+      animation: rise 620ms ease-out both;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 22px;
+      color: var(--clay);
+      font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 36px;
+      height: 2px;
+      background: var(--clay);
+    }
+
+    h1 {
+      max-width: 820px;
+      margin: 0 0 22px;
+      font-size: clamp(2.75rem, 5vw, 4.6rem);
+      line-height: 0.94;
+      letter-spacing: -0.075em;
+    }
+
+    .lead {
+      max-width: 680px;
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 1.7vw, 1.28rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .button,
+    .ghost {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 50px;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .button {
+      color: #fffaf0;
+      background: var(--moss);
+      box-shadow: 0 12px 28px rgba(50, 79, 59, 0.24);
+    }
+
+    .ghost {
+      color: var(--moss);
+      border: 1px solid var(--line);
+      background: rgba(255, 250, 240, 0.55);
+    }
+
+    .card {
+      padding: 28px;
+      background: var(--panel-strong);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      animation: rise 620ms 120ms ease-out both;
+    }
+
+    .card h2,
+    .section h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .slots {
+      display: grid;
+      gap: 13px;
+      margin: 24px 0;
+      padding: 0;
+      list-style: none;
+      font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+    }
+
+    .slots li {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 14px;
+      border-radius: 18px;
+      background: var(--moss-soft);
+      color: #253328;
+      font-weight: 650;
+    }
+
+    .slots span {
+      display: inline-grid;
+      width: 24px;
+      height: 24px;
+      flex: 0 0 24px;
+      place-items: center;
+      color: #fffaf0;
+      background: var(--moss);
+      border-radius: 50%;
+      font-size: 0.78rem;
+    }
+
+    .fine-print {
+      color: var(--muted);
+      font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .section {
+      margin-top: 34px;
+      padding: clamp(26px, 4vw, 44px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 252, 245, 0.68);
+      backdrop-filter: blur(10px);
+      animation: rise 620ms ease-out both;
+    }
+
+    .mini {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: rgba(255, 250, 240, 0.76);
+    }
+
+    .mini h3 {
+      margin: 0 0 10px;
+      font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+      font-size: 1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .mini p,
+    .section p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 22px;
+    }
+
+    .list {
+      margin: 16px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .list li + li {
+      margin-top: 8px;
+    }
+
+    .intake {
+      display: grid;
+      grid-template-columns: minmax(0, 0.78fr) minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+      margin-top: 34px;
+      padding: clamp(26px, 4vw, 44px);
+      border-radius: var(--radius);
+      background: var(--moss);
+      color: #fffaf0;
+      box-shadow: var(--shadow);
+    }
+
+    .intake h2,
+    .intake p {
+      color: inherit;
+    }
+
+    .form-preview {
+      display: grid;
+      gap: 12px;
+      padding: 22px;
+      border-radius: 24px;
+      background: rgba(255, 250, 240, 0.12);
+      border: 1px solid rgba(255, 250, 240, 0.22);
+      font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+    }
+
+    .field,
+    .input,
+    .textarea,
+    .select {
+      padding: 13px 14px;
+      width: 100%;
+      border: 0;
+      border-radius: 14px;
+      background: rgba(255, 250, 240, 0.92);
+      color: var(--muted);
+      font: inherit;
+    }
+
+    .input::placeholder,
+    .textarea::placeholder {
+      color: rgba(92, 106, 98, 0.72);
+    }
+
+    .textarea {
+      min-height: 118px;
+      resize: vertical;
+    }
+
+    .field strong {
+      display: block;
+      color: var(--ink);
+      font-size: 0.84rem;
+      margin-bottom: 2px;
+    }
+
+    .label {
+      display: grid;
+      gap: 6px;
+      color: rgba(255, 250, 240, 0.86);
+      font-size: 0.86rem;
+      font-weight: 800;
+    }
+
+    .submit {
+      justify-self: start;
+      border: 0;
+      cursor: pointer;
+      color: var(--moss);
+      background: #fffaf0;
+      box-shadow: 0 12px 28px rgba(20, 28, 22, 0.18);
+    }
+
+    .form-note {
+      color: rgba(255, 250, 240, 0.78);
+      font-size: 0.88rem;
+    }
+
+    footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-family: "Avenir Next", "Trebuchet MS", sans-serif;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 32px;
+      }
+
+      .nav-note {
+        text-align: left;
+      }
+
+      .hero,
+      .grid,
+      .two-col,
+      .intake {
+        grid-template-columns: 1fr;
+      }
+
+      h1 {
+        font-size: clamp(2.65rem, 13.5vw, 4.5rem);
+      }
+
+      .intake {
+        padding: 24px;
+      }
+
+      .form-preview {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav" aria-label="Page">
+      <div class="brand"><span class="mark" aria-hidden="true"></span> Agent-native OPC</div>
+      <div class="nav-note">Public-site review only. No login needed for the first audit.</div>
+    </nav>
+
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Website Growth & Ops Audit</div>
+        <h1>Find the fixes your website is quietly asking for.</h1>
+        <p class="lead">
+          A practical public-site audit for small businesses, founders, ecommerce stores, and service providers. I look for the highest-leverage improvements in clarity, trust, conversion, lead capture, and follow-up.
+        </p>
+        <div class="actions">
+          <a class="button" href="#intake">Request an audit</a>
+          <a class="ghost" href="#scope">See what is reviewed</a>
+        </div>
+      </div>
+
+      <aside class="card" aria-label="First audit details">
+        <h2>First review starts safely.</h2>
+        <p class="fine-print">The first audit uses public information only. No admin access, customer records, payment data, private analytics, or passwords.</p>
+        <ul class="slots">
+          <li><span>1</span> Send a public website URL.</li>
+          <li><span>2</span> Add one sentence about the site goal.</li>
+          <li><span>3</span> Get a concise report with the top fixes.</li>
+        </ul>
+        <p class="fine-print">Best for sites trying to generate leads, sales, bookings, signups, trust, or better follow-up.</p>
+      </aside>
+    </section>
+
+    <section class="section" id="scope">
+      <h2>What gets reviewed</h2>
+      <p>The audit focuses on visible, practical issues that a visitor or potential customer would experience before they ever talk to you.</p>
+      <div class="grid">
+        <article class="mini">
+          <h3>Clarity</h3>
+          <p>Can a visitor quickly understand what you offer, who it is for, and what to do next?</p>
+        </article>
+        <article class="mini">
+          <h3>Trust</h3>
+          <p>Does the page give enough proof, identity, reassurance, and risk reduction?</p>
+        </article>
+        <article class="mini">
+          <h3>Conversion Path</h3>
+          <p>Are forms, checkout, booking, calls, or contact routes easy to find and complete?</p>
+        </article>
+        <article class="mini">
+          <h3>Mobile First Impression</h3>
+          <p>Does the top section still make sense on a phone, where many buyers first land?</p>
+        </article>
+        <article class="mini">
+          <h3>Ops Follow-Up</h3>
+          <p>What likely happens after someone submits, books, buys, or asks for help?</p>
+        </article>
+        <article class="mini">
+          <h3>Quick Wins</h3>
+          <p>Which fixes are most likely to matter soon without turning into a huge rebuild?</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>What you receive</h2>
+      <div class="two-col">
+        <div class="mini">
+          <h3>Concise audit report</h3>
+          <ul class="list">
+            <li>Plain-English summary.</li>
+            <li>Top 5-10 issues to prioritize.</li>
+            <li>Top 3 recommended fixes.</li>
+            <li>Quick wins vs deeper work.</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h3>Clear boundaries</h3>
+          <ul class="list">
+            <li>No guaranteed SEO rankings or revenue claims.</li>
+            <li>No request for passwords or admin access.</li>
+            <li>No legal, tax, medical, financial, or compliance advice.</li>
+            <li>Optional implementation estimate only after the audit.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="intake" id="intake">
+      <div>
+        <h2>Request the first audit</h2>
+        <p>
+          Send the public website URL and one sentence about what the site is supposed to achieve. This form uses safe public-site intake only.
+        </p>
+        <p class="form-note">The form opens in Tally and only asks for public-site audit intake information.</p>
+      </div>
+      <div class="form-preview" aria-label="Website audit intake form preview">
+        <div class="field"><strong>Name</strong> Your name</div>
+        <div class="field"><strong>Email</strong> you@example.com</div>
+        <div class="field"><strong>Public website URL</strong> https://example.com</div>
+        <div class="field"><strong>Website goal, business type, main audience, and any specific concern</strong> What should the site achieve, and what feels unclear or underperforming?</div>
+        <p class="form-note">Please do not submit passwords, customer data, payment data, private analytics, or admin access.</p>
+        <a class="button submit" href="https://tally.so/r/ob5zYb" target="_blank" rel="noopener">Open audit request form</a>
+      </div>
+    </section>
+
+    <footer>
+      Built as a lightweight service-entry page for an agent-native OPC. The service is ordinary and concrete; the agent team is the delivery engine behind the scenes.
+    </footer>
+  </main>
+</body>
+</html>
