@@ -547,7 +547,7 @@
 
     <section class="section" id="checkout">
       <h2>Agent-readable checkout</h2>
-      <p>Agents can purchase the small readiness kit or request a fixed-scope readiness audit through the402. Domestic Alipay agents can also test the 0.01 CNY HTTP 402 payment path.</p>
+      <p>Agents can purchase the small readiness kit, call a low-cost readiness signal API, or request a fixed-scope readiness audit. Domestic Alipay agents can also test the 0.01 CNY HTTP 402 payment path.</p>
       <div class="checkout" aria-label="Agent checkout endpoints">
         <div class="checkout-row">
           <div>
@@ -562,6 +562,13 @@
             <span>Fixed-scope public URL audit delivered within 24 hours. the402 purchase endpoint: <code>POST /v1/services/svc_379692facebe4c97/purchase</code>.</span>
           </div>
           <a class="small-link" href="https://api.the402.ai/v1/services/svc_379692facebe4c97">Service API</a>
+        </div>
+        <div class="checkout-row">
+          <div>
+            <strong>$0.05 AgenticTrade readiness API</strong>
+            <span>Machine-readable JSON signal for public URLs: score, buying-agent fit, checkout/discovery gaps, safe input policy, and next actions.</span>
+          </div>
+          <a class="small-link" href="https://agentictrade.io/marketplace/b261b1af-721f-45c9-b8fc-74849dc25b98">AgenticTrade API</a>
         </div>
         <div class="checkout-row">
           <div>
@@ -622,6 +629,15 @@
         "priceCurrency": "USD",
         "url": "https://api.the402.ai/v1/services/svc_379692facebe4c97",
         "identifier": "svc_379692facebe4c97",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "Agentic Commerce Readiness API",
+        "price": "0.05",
+        "priceCurrency": "USD",
+        "url": "https://agentictrade.io/marketplace/b261b1af-721f-45c9-b8fc-74849dc25b98",
+        "identifier": "b261b1af-721f-45c9-b8fc-74849dc25b98",
         "availability": "https://schema.org/InStock"
       },
       {
